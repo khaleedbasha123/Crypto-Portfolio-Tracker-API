@@ -4,7 +4,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.util.Map;
 
