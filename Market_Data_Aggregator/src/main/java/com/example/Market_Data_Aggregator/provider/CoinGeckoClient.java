@@ -40,4 +40,29 @@ public class CoinGeckoClient {
         }
         return (List<Map<String, Object>>) coins;
     }
+
+    // Returns [[timestampMillis, price], ...] from /coins/{id}/market_chart
+    public List<List<Number>> getMarketChart(String id, String currency, int days){
+        Map<String, Object> body = restClient.get()
+                .uri(u -> u.path("/coins/{id}/market_chart")
+                            .queryParam("vs_currency", currency)
+                            .queryParam("days", days)
+                            .build(id))
+                .retrieve()
+                .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+
+        List<List<Number>> result = new ArrayList<>();
+        if(body == null || !(body.get("prices") instanceof List<?> prices)){
+            return result;
+        }
+
+        for (Object row : prices) {
+            if (row instanceof List<?> r && r.size() >= 2
+                    && r.get(0) instanceof Number t && r.get(1) instanceof Number p) {
+                result.add(List.of(t, p));
+            }
+        }
+
+        return result;
+    }
 }
