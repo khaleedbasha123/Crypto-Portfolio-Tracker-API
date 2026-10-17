@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Map;
 
 import com.example.Market_Data_Aggregator.model.dto.PriceResponse;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +21,8 @@ public class PriceService {
         this.client = client;
     }
 
+    // Cached for 60 seconds per coin + currency
+    @Cacheable(cacheNames = "prices", key = "#coin.toLowerCase() + ':' + #currency.toLowerCase()")
     public PriceResponse getPrice(String coin, String currency) {
         String id = coin.toLowerCase();
         String cur = currency.toLowerCase();
