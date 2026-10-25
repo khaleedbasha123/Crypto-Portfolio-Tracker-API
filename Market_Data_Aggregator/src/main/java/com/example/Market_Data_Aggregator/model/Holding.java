@@ -1,4 +1,4 @@
-package com.example.Market_Data_Aggregator.model.dto;
+package com.example.Market_Data_Aggregator.model;
 
 import jakarta.persistence.*;
 
