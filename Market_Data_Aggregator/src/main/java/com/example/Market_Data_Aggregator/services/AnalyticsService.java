@@ -27,7 +27,7 @@ public class AnalyticsService {
     }
 
     //Cached for 30 minutes per coin + days
-    @Cacheable(cacheNames = "charts", key = "#coin.toLower() + ':' + #days")
+    @Cacheable(cacheNames = "charts", key = "#coin.toLowerCase() + ':' + #days")
     public AnalyticsResponse getAnalytics(String coin, int days){
         if(days < 2 || days > 365){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "days must be between 2 and 365");

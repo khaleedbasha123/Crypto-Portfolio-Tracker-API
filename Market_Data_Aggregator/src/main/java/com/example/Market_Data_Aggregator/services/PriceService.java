@@ -36,4 +36,10 @@ public class PriceService {
         }
         return new PriceResponse(id, cur, prices.get(cur), Instant.now());
     }
+
+    // One batched call for many coins (used by the portfolio). Example idsCsv: "bitcoin,ethereum"
+    @Cacheable(cacheNames = "prices", key = "'batch:inr:' + #idsCsv")
+    public Map<String, Map<String, BigDecimal>> getPricesInInr(String idsCsv) {
+        return client.getPrices(idsCsv, "inr");
+    }
 }
