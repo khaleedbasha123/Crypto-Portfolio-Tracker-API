@@ -1,4 +1,4 @@
-A Spring Boot backend that fetches cryptocurrency prices from CoinGecko (in INR) and is designed to grow into a portfolio tracker with price alerts and client accounts.
+A Spring Boot backend that fetches cryptocurrency prices from CoinGecko and is designed to grow into a portfolio tracker with price alerts and client accounts.
 
 ## Tech Stack
 
